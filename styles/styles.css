@@ -144,7 +144,7 @@ h1{
 #avatar {
     position: absolute;
     left:  35%;   /* à droite du nom */
-    top: 160px;
+    top: -160px;
     opacity: 0;
     transform: translateY(0) scale(2);
     transition: opacity 0.2s ease, transform 0.2s ease;
