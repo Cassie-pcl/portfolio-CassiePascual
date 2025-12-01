@@ -133,7 +133,7 @@ document.querySelectorAll('.sous-nav a').forEach(link => {
 
 
 document.getElementById('bulle-cv').addEventListener('click', () => {
-  window.location.href = "pdf/cv_diago_v1.pdf";
+  window.location.href = "pdf/cv.pdf"
 });
 
 // Défilement fluide vers la section contact
