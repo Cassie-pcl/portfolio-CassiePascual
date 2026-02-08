@@ -1,9 +1,13 @@
-*{
+/*{
     margin:0;
     padding:0;
+    font-family: monospace;
 
     
 
+}*/
+html {
+    font-size: 16px;
 }
 
 .page-section {
@@ -23,8 +27,23 @@
 
 
 body{
+    font-family: monospace;
+    line-height: 1.5;
     background: black;
     overflow-x: hidden;
+}
+
+
+@media screen and (max-width: 768px) {
+    .slider {
+        min-height: 60vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .slider {
+        min-height: 50vh;
+    }
 }
 
 .slider{
@@ -41,7 +60,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100svw;
+    width: 100vw;
     height: 100vh;
     z-index: -1;
     overflow: hidden;
@@ -96,6 +115,34 @@ body{
     left: 10%;
     animation-delay: 15s;
 }
+
+@media screen and (max-width: 768px) {
+    .bg-blobs span:nth-child(1),
+    .bg-blobs span:nth-child(2) {
+        width: 250px;
+        height: 250px;
+    }
+    .bg-blobs span:nth-child(3),
+    .bg-blobs span:nth-child(4),
+    .bg-blobs span:nth-child(5) {
+        width: 200px;
+        height: 200px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .bg-blobs span:nth-child(1),
+    .bg-blobs span:nth-child(2) {
+        width: 180px;
+        height: 180px;
+    }
+    .bg-blobs span:nth-child(3),
+    .bg-blobs span:nth-child(4),
+    .bg-blobs span:nth-child(5) {
+        width: 150px;
+        height: 150px;
+    }
+}
+
 
 @keyframes moveBlob {
     0% {
@@ -157,6 +204,31 @@ h1{
     transform: translateY(0) scale(2);
 }
 
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    #avatar {
+        left: 30%;
+        top: -120px;
+        transform: translateY(0) scale(1.5);
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    #avatar {
+        left: 25%;
+        top: -90px;
+        transform: translateY(0) scale(1.2);
+    }
+}
+
 
 /* TITRE A PROPOS DE MOI*/
 h2{
@@ -179,24 +251,174 @@ h4{
 
 }
 
-#creations{
+@media screen and (max-width: 768px) {
+    h2, h3, h4 {
+        font-size: 2.4rem;
+    }
+}
+
+/* MOBILE (480px et moins) */
+@media screen and (max-width: 480px) {
+    h2, h3, h4 {
+        font-size: 1.8rem;
+    }
+}
+
+#creations h3 {
     margin-top: 400px;
-    margin-bottom: 400px;
+    margin-bottom: 120px;
 }
 
 .mescrea-content{
-   position: absolute; 
+   /*position: absolute; 
    top: 10%;
    left: 50%;
-   transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);*/
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 40px;
    text-align: center;
 
 }
 
+.categories {
+    margin-bottom: 160px;
+
+}
+
+.titre_categorie {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    font-size: 4rem;
+    text-align: left;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.titre_categorie::after {
+    content: "";
+    flex-grow: 1;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.projet {
+    margin-bottom: 120px;
+    text-align: left;
+}
+
+.titre_projet {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.desc_projet {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    font-style: italic;
+}
+
+.media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+}
+.media img,
+.media video {
+    width: 100%;
+    max-width: 900px;
+    display: block;
+    border-radius: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.video-poster {
+    cursor: none;
+}
+
+.lien-jeu {
+    cursor: none;
+}
+
+@media screen and (max-width: 768px) {
+    #creations h3 {
+        margin-top: 250px;  
+        margin-bottom: 80px;
+        font-size: 2.4rem;  
+    }
+    
+    .titre_categorie {
+        font-size: 3rem;
+        margin-bottom: 40px;
+        gap: 40px;
+    }
+
+    .titre_projet {
+        font-size: 1.6rem;
+    }
+
+    .desc_projet {
+        font-size: 1rem;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .media img,
+    .media video {
+        max-width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    #creations h3 {
+        margin-top: 150px;
+        margin-bottom: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .titre_categorie {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        gap: 20px;
+    }
+
+    .titre_projet {
+        font-size: 1.4rem;
+    }
+
+    .desc_projet {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .media {
+        gap: 20px;
+    }
+
+    .media img,
+    .media video {
+        width: 100%;
+        border-radius: 15px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+
 p{
     color: white;
-  font-size: 1.5rem; 
-  line-height: 1.5em; 
+    font-size: 1.5rem; 
+    line-height: 1.5em; 
 }
 
 .slider-content p{
@@ -218,6 +440,7 @@ p{
 
 .flex{
     display: flex; /*ca c'est pour mettre le texte a cote du titre*/
+    gap: 40px;
 }
 
 .w40{
@@ -242,6 +465,59 @@ p{
     max-width: 1280px;
     margin-inline: auto;
     text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    p {
+        font-size: 1.3rem;
+        line-height: 1.4em;
+    }
+
+    .slider-content p {
+        font-size: 1.6rem;
+    }
+
+    .flex {
+        flex-direction: column;
+    }
+
+    .w40, .w60 {
+        width: 100%;
+    }
+
+    .titre, .texte {
+        padding: 80px 20px;
+    }
+
+    .section {
+        padding: 80px 20px;
+        margin-bottom: 150px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    p {
+        font-size: 1.1rem;
+        line-height: 1.3em;
+    }
+
+    .slider-content p {
+        font-size: 1.4rem;
+    }
+
+    .titre, .texte {
+        padding: 60px 15px;
+    }
+
+    .section {
+        padding: 60px 15px;
+        margin-bottom: 100px;
+    }
+
+    .flex {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 
 /*SLIDER PROJETS*/
@@ -321,6 +597,23 @@ img {
     white-space: nowrap;
     transform: translate(-50%, -50%) scale(0.8);
 
+}
+
+@media screen and (max-width: 768px) {
+    .cursor-text {
+        font-size: 1rem;        
+        padding: 6px 10px;      
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .cursor-text {
+        font-size: 0.9rem;       
+        padding: 5px 8px;
+        transform: translate(-50%, -50%) scale(0.6);
+    }
 }
 
 
@@ -455,11 +748,75 @@ img:hover{
 }
 
 
+@media screen and (max-width: 768px) {
+    #navbar {
+        left: 5%;
+        right: 5%;
+        padding: 8px 15px;
+    }
+
+    #navbar ul {
+        flex-wrap: wrap;          
+        justify-content: center;
+    }
+
+    #navbar ul li a {
+        font-size: 1rem;          
+        padding: 5px 10px;
+    }
+
+    .sous-nav {
+        top: 28px;
+        padding: 8px 15px;
+        border-radius: 0 0 8px 8px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    #navbar {
+        left: 2%;
+        right: 2%;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    #navbar ul {
+        flex-direction: column;    
+        gap: 5px;
+    }
+
+    #navbar ul li a {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+    }
+
+    .has-sous-nav:hover .sous-nav {
+        display: none;              
+    }
+
+    .has-sous-nav.active .sous-nav {
+        display: block;             
+    }
+
+    .sous-nav {
+        top: auto;
+        left: 0;
+        margin-top: 5px;
+        border-radius: 0 0 8px 8px;
+        width: 100%;               
+    }
+}
+
+
+
 
 /* FOOTER */
 .footer {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   text-align: center;
@@ -511,6 +868,71 @@ img:hover{
   font-weight: bold;
 }
 
+
+@media screen and (max-width: 768px) {
+    .footer {
+        padding: 25px 15px;      
+        font-size: 0.9rem;       
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        min-height: 25vh;
+    }
+
+    .footer-links {
+        font-size: 3rem;          
+        flex-wrap: wrap;          
+        justify-content: center;
+    }
+
+    .footer-links a {
+        margin: 5px 8px;          
+    }
+
+    .hdp a {
+        font-size: 0.9rem;
+        margin: 0 5px;
+    }
+
+    .footer-copyright {
+        bottom: 5px;
+        left: 5px;
+        font-size: 0.8rem;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .footer {
+        padding: 20px 10px;
+        font-size: 0.8rem;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        min-height: 20vh;
+    }
+
+    .footer-links {
+        font-size: 2.5rem;        
+        flex-direction: column;   
+        gap: 8px;
+    }
+
+    .footer-links a {
+        margin: 4px 0;
+    }
+
+    .hdp a {
+        font-size: 0.8rem;
+        margin: 0 3px;
+    }
+
+    .footer-copyright {
+        bottom: 3px;
+        left: 3px;
+        font-size: 0.7rem;
+    }
+}
+
+
 /* BULLE CONTACT et CV */
 .bulle-contact {
   position: fixed;
@@ -551,6 +973,43 @@ img:hover{
     bottom: 80%;
 }
 
+
+@media screen and (max-width: 768px) {
+    .bulle-contact {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        right: 25px; 
+    }
+
+    #bulle-cv {
+        bottom: 70%;
+    }
+
+    #bulle-contact {
+        bottom: 75%;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .bulle-contact {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+        right: 15px; 
+    }
+
+    #bulle-cv {
+        bottom: 65%;
+    }
+
+    #bulle-contact {
+        bottom: 70%;
+    }
+}
+
+
 /* SECTION SHOWREEL */
 .showreel-section {
   background: rgba(0, 0, 0, 0.03); /* léger fond pour contraster */
@@ -565,6 +1024,31 @@ img:hover{
   color: white;
 
 }
+
+
+@media screen and (max-width: 768px) {
+    .showreel-section {
+        padding: 100px 15px; 
+        margin-top: 250px;    
+    }
+
+    .showreel-section h2 {
+        font-size: 2.2rem;   
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .showreel-section {
+        padding: 80px 10px;
+        margin-top: 200px;
+    }
+
+    .showreel-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
 
 /* Conteneur vidéo */
 .video-container {

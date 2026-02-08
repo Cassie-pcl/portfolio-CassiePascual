@@ -39,46 +39,46 @@ name.addEventListener("mouseleave", () => {
 });
 
 
-const slides = document.querySelectorAll('.slide');
+//const slides = document.querySelectorAll('.slide');
 
-slides.forEach((slide, i) => {
-  slide.addEventListener('mouseenter', () => {
-    slide.style.transform = 'scale(1.2)';
+//slides.forEach((slide, i) => {
+  //slide.addEventListener('mouseenter', () => {
+    //slide.style.transform = 'scale(1.2)';
 
-    slides.forEach((other, j) => {
-      const distance = j - i;
-      if (distance === 0) return; // l'image elle-même
+    //slides.forEach((other, j) => {
+      //const distance = j - i;
+      //if (distance === 0) return; // l'image elle-même
       // Plus une image est proche, plus elle bouge
-      const offset = 200 / Math.abs(distance);
-      other.style.transform = `translateX(${distance * offset}px)`;
-    });
-  });
+      //const offset = 200 / Math.abs(distance);
+      //other.style.transform = `translateX(${distance * offset}px)`;
+    //});
+  //});
 
-  slide.addEventListener('mouseleave', () => {
-    slides.forEach((other) => {
-      other.style.transform = 'translateX(0) scale(1)';
-    });
-  });
-});
+  //slide.addEventListener('mouseleave', () => {
+    //slides.forEach((other) => {
+      //other.style.transform = 'translateX(0) scale(1)';
+    //});
+  //});
+//});
 
-const track = document.querySelector('.slide-track');
-const slidess = Array.from(track.children);
+//const track = document.querySelector('.slide-track');
+//const slidess = Array.from(track.children);
 
-slidess.forEach(slide => {
-  track.appendChild(slide.cloneNode(true)); // duplique toutes les slides
-});
+//slidess.forEach(slide => {
+  //track.appendChild(slide.cloneNode(true)); // duplique toutes les slides
+//});
 
 // Re-sélectionner toutes les slides (y compris les clones)
-const allSlides = document.querySelectorAll('.slide');
+//const allSlides = document.querySelectorAll('.slide');
 
-allSlides.forEach(slide => {
-    slide.addEventListener('click', () => {
-        const page = slide.dataset.page;
-        if (page) {
-            window.location.href = page;
-        }
-    });
-});
+//allSlides.forEach(slide => {
+    //slide.addEventListener('click', () => {
+        //const page = slide.dataset.page;
+        //if (page) {
+            //window.location.href = page;
+        //}
+    //});
+//});
 
 
 // Scroll fluide pour tous les liens internes
@@ -101,32 +101,87 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // Création du span qui va suivre la souris
 const cursorText = document.createElement('span');
 cursorText.classList.add('cursor-text');
-cursorText.textContent = 'Découvrir le projet';
+//cursorText.textContent = 'Découvrir';
 document.body.appendChild(cursorText);
 
 // Sélectionne toutes les slides
-const slidesss = document.querySelectorAll('.slide');
+////slidesss.forEach(slide => {
+    //slide.addEventListener('mouseenter', () => {
+        //cursorText.style.opacity = '1';
+    //});
 
-slidesss.forEach(slide => {
+    //slide.addEventListener('mouseleave', () => {
+        //cursorText.style.opacity = '0';
+    //});
+
+    //slide.addEventListener('mousemove', e => {
+        //cursorText.style.left = e.clientX + 15 + 'px';
+        //cursorText.style.top = e.clientY + 15 + 'px';
+    //})
+
+// Pour les slides
+document.querySelectorAll('.lien-jeu').forEach(slide => {
     slide.addEventListener('mouseenter', () => {
-        cursorText.style.opacity = '1';
-    });
-
-    slide.addEventListener('mouseleave', () => {
-        cursorText.style.opacity = '0';
-    });
-
+      cursorText.style.opacity = '1';
+      cursorText.textContent = 'Découvrir le jeu';
+      });
+    slide.addEventListener('mouseleave', () => cursorText.style.opacity = '0');
     slide.addEventListener('mousemove', e => {
         cursorText.style.left = e.clientX + 15 + 'px';
         cursorText.style.top = e.clientY + 15 + 'px';
     });
+    slide.addEventListener('click', () => {
+    const url = slide.dataset.url;
+    if (url) {
+      window.open(url, '_blank');
+    }
+    });
 });
+
+// Pour les médias (images et vidéos)
+document.querySelectorAll('.video-poster').forEach(media => {
+    media.addEventListener('mouseenter', () => {
+      cursorText.style.opacity = '1';
+      cursorText.textContent = 'Découvrir le projet';
+      //document.body.style.cursor = 'none';
+      });
+    media.addEventListener('mouseleave', () => {
+      cursorText.style.opacity = '0';
+      //document.body.style.cursor = 'auto';
+      });
+
+    media.addEventListener('mousemove', e => {
+        cursorText.style.left = e.clientX + 15 + 'px';
+        cursorText.style.top = e.clientY + 15 + 'px';
+    });
+    media.addEventListener('click', () => {
+    const videoSrc = media.dataset.video;
+    const video = document.createElement('video');
+    video.src = videoSrc;
+    video.controls = true;
+    video.autoplay = true;
+    video.width = media.width;
+
+    media.replaceWith(video);
+
+    cursorText.style.opacity = '0';
+    //document.body.style.cursor = 'auto';
+    });
+});
+
+
+
+
+
 
 document.querySelectorAll('.sous-nav a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-        const page = e.target.getAttribute('href');
-        if (page) window.location.href = page;
+        const targetId = link.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({behavior: 'smooth'});
+        }
     });
 });
 
@@ -169,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, {
-    threshold: 0.2 // plus petit = transition plus douce entre les sections
+    threshold: 0.05 // plus petit = transition plus douce entre les sections
   });
 
   sections.forEach(section => observation.observe(section));
