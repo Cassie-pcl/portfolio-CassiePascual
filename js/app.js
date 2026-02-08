@@ -188,7 +188,7 @@ document.querySelectorAll('.sous-nav a').forEach(link => {
 
 
 document.getElementById('bulle-cv').addEventListener('click', () => {
-  window.location.href = "pdf/cv.pdf"
+  window.location.href = "pdf/cv_lastvf.pdf"
 });
 
 // Défilement fluide vers la section contact
