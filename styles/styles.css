@@ -272,10 +272,15 @@ h4{
 .mescrea-content{
    display: flex;
    flex-direction: column;
-   align-items: center;
+   max-width: 1000px;
+   height: auto;
+   margin: 0 auto;
    width: 100%;
    padding: clamp(20px, 4vw, 40px);
    text-align: center;
+   /*max-width: 1000px;*/
+   align-items: center;
+
 
 }
 

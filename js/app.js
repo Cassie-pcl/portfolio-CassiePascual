@@ -252,6 +252,23 @@ const observer = new IntersectionObserver(
 observer.observe(footer);
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll('.page-section');
+
+  const observation = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  }, {
+    threshold: 0.05, // plus petit = transition plus douce entre les sections
+  });
+
+  sections.forEach(section => observation.observe(section));
+});
 
 
 
