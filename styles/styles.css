@@ -265,7 +265,7 @@ h4{
 }
 
 #creations h3 {
-    margin-top: 400px;
+    margin-top: clamp(80px, 10vh, 160px);
     margin-bottom: 120px;
 }
 
