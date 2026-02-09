@@ -139,35 +139,75 @@ document.querySelectorAll('.lien-jeu').forEach(slide => {
 });
 
 // Pour les médias (images et vidéos)
+//document.querySelectorAll('.video-poster').forEach(media => {
+    //media.addEventListener('mouseenter', () => {
+      //cursorText.style.opacity = '1';
+      //cursorText.textContent = 'Découvrir le projet';
+      //document.body.style.cursor = 'none';
+      //});
+    //media.addEventListener('mouseleave', () => {
+      //cursorText.style.opacity = '0';
+      //document.body.style.cursor = 'auto';
+      //});
+
+    //media.addEventListener('mousemove', e => {
+        //cursorText.style.left = e.clientX + 15 + 'px';
+        //cursorText.style.top = e.clientY + 15 + 'px';
+    //});
+    //media.addEventListener('click', () => {
+    //const videoSrc = media.dataset.video;
+    //const video = document.createElement('video');
+    //video.src = videoSrc;
+    //video.controls = true;
+    //video.autoplay = true;
+    //video.width = media.width;
+
+    //media.replaceWith(video);
+
+    //cursorText.style.opacity = '0';
+    //document.body.style.cursor = 'auto';
+    //});
+//});
+
+
 document.querySelectorAll('.video-poster').forEach(media => {
     media.addEventListener('mouseenter', () => {
-      cursorText.style.opacity = '1';
-      cursorText.textContent = 'Découvrir le projet';
-      //document.body.style.cursor = 'none';
-      });
+        cursorText.style.opacity = '1';
+        cursorText.textContent = 'Découvrir le projet';
+    });
+
     media.addEventListener('mouseleave', () => {
-      cursorText.style.opacity = '0';
-      //document.body.style.cursor = 'auto';
-      });
+        cursorText.style.opacity = '0';
+        document.body.style.cursor = 'auto';
+    });
 
     media.addEventListener('mousemove', e => {
         cursorText.style.left = e.clientX + 15 + 'px';
         cursorText.style.top = e.clientY + 15 + 'px';
     });
+
     media.addEventListener('click', () => {
-    const videoSrc = media.dataset.video;
-    const video = document.createElement('video');
-    video.src = videoSrc;
-    video.controls = true;
-    video.autoplay = true;
-    video.width = media.width;
+        const videoSrc = media.dataset.video;
+        if (!videoSrc) return; // sécurité
 
-    media.replaceWith(video);
+        const video = document.createElement('video');
+        video.src = videoSrc;
+        video.controls = true;
+        video.autoplay = true;
 
-    cursorText.style.opacity = '0';
-    //document.body.style.cursor = 'auto';
+        // largeur fiable pour Safari
+        const width = media.getBoundingClientRect().width;
+        video.style.width = width + 'px';
+        video.style.height = 'auto';
+
+        // remplace l'image par la vidéo
+        media.replaceWith(video);
+
+        cursorText.style.opacity = '0';
+        document.body.style.cursor = 'auto';
     });
 });
+
 
 
 
