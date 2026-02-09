@@ -264,20 +264,18 @@ h4{
     }
 }
 
-#creations h3 {
-    position: relative;
-    overflow: visible;
+/*#creations h3 {
     
-}
+    
+}*/
 
 .mescrea-content{
-   /*position: absolute; 
-   top: 10%;
-   left: 50%;
-   transform: translate(-50%, -50%);*/
-   max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   /*max-width: 1200px;*/
    width: 100%;
-   margin: 0 auto;
    padding: clamp(20px, 4vw, 40px);
    text-align: center;
 
