@@ -270,11 +270,9 @@ h4{
 }*/
 
 .mescrea-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-   /*max-width: 1200px;*/
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    width: 100%;
    padding: clamp(20px, 4vw, 40px);
    text-align: center;
@@ -282,14 +280,15 @@ h4{
 }
 
 .categories {
-    margin-bottom: clamp(60px, 10vh, 120px);
+    margin-bottom: clamp(40px, 10vh, 120px);
 
 }
 
 .titre_categorie {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: white;
-    font-size: 4rem;
+    /*font-size: 4rem;*/
+    font-size: clamp(2rem, 5vw, 4rem);
     text-align: left;
     margin-bottom: 60px;
     display: flex;
@@ -306,20 +305,22 @@ h4{
 }
 
 .projet {
-    margin-bottom: clamp(60px, 8vh, 100px);
+    margin-bottom: clamp(40px, 8vh, 100px);
     text-align: left;
 }
 
 .titre_projet {
     color: white;
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    /*font-size: 2rem;*/
     margin-bottom: 10px;
     text-align: center;
 }
 
 .desc_projet {
-    font-size: 1.2rem;
-    max-width: 600px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    /*font-size: 1.2rem;*/
+    max-width: 100%;
     margin: 0 auto 30px auto;
     text-align: center;
     font-style: italic;
@@ -336,6 +337,7 @@ h4{
 .media video {
     width: 100%;
     max-width: 900px;
+    height: auto;
     display: block;
     border-radius: 20px;
     border: 3px solid rgba(255, 255, 255, 0.2);
