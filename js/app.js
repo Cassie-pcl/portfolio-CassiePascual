@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, {
-    threshold: 0.05, // plus petit = transition plus douce entre les sections
+    threshold: 0.001 // plus petit = transition plus douce entre les sections
   });
 
   sections.forEach(section => observation.observe(section));
