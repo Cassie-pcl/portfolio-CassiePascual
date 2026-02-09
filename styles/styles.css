@@ -265,8 +265,9 @@ h4{
 }
 
 #creations h3 {
-    margin-top: clamp(80px, 10vh, 160px);
-    margin-bottom: 120px;
+    position: relative;
+    overflow: visible;
+    
 }
 
 .mescrea-content{
@@ -275,14 +276,15 @@ h4{
    left: 50%;
    transform: translate(-50%, -50%);*/
    max-width: 1200px;
+   width: 100%;
    margin: 0 auto;
-   padding: 0 40px;
+   padding: clamp(20px, 4vw, 40px);
    text-align: center;
 
 }
 
 .categories {
-    margin-bottom: 160px;
+    margin-bottom: clamp(60px, 10vh, 120px);
 
 }
 
@@ -306,7 +308,7 @@ h4{
 }
 
 .projet {
-    margin-bottom: 120px;
+    margin-bottom: clamp(60px, 8vh, 100px);
     text-align: left;
 }
 
@@ -1016,7 +1018,7 @@ img:hover{
   backdrop-filter: blur(10px);
   padding: 150px 20px;
   text-align: center;
-  margin-top: 400px;
+  margin-top: 200px;
 }
 
 .showreel-section h2 {
