@@ -1064,3 +1064,9 @@ img:hover{
     max-width: 1000px;      /* optionnel : limite la taille des images */
     width: 100%;           /* responsive si max-width est défini */
 }
+
+.Affiches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
