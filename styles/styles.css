@@ -1,30 +1,33 @@
-/* =========================================================
-   VARIABLES
-   ========================================================= */
+
 :root {
-    /* CORRECTION : largeur du slider pilotée par une variable */
     --slide-w: 500px;
-    /* CORRECTION : taille de l'avatar (ajuste selon ton ancienne taille) */
-    --avatar-size: 80px;
+    --avatar-scale: 2;
+    --avatar-w: 180px;
+    --avatar-gap: 25px;
+    --nav-h: 90px;
 }
 
 @media screen and (max-width: 1024px) {
     :root { --slide-w: 400px; }
 }
 @media screen and (max-width: 768px) {
-    :root { --slide-w: 300px; --avatar-size: 64px; }
+    :root { --slide-w: 300px;  }
 }
 @media screen and (max-width: 480px) {
-    :root { --slide-w: 220px; --avatar-size: 56px; }
+    :root { --slide-w: 220px; --nav-h: 170px; }
 }
 
 html {
     font-size: 16px;
+
+    scroll-padding-top: 90px;
 }
 
-/* =========================================================
-   ANIMATION D'APPARITION
-   ========================================================= */
+@media screen and (max-width: 480px) {
+    html { scroll-padding-top: 170px; } 
+}
+
+
 .page-section {
     opacity: 0;
     filter: blur(20px);
@@ -38,7 +41,6 @@ html {
     transform: translateY(0);
 }
 
-/* CORRECTION : respecte les utilisateurs qui désactivent les animations */
 @media (prefers-reduced-motion: reduce) {
     .page-section {
         opacity: 1;
@@ -52,9 +54,6 @@ html {
     }
 }
 
-/* =========================================================
-   POLICES
-   ========================================================= */
 @font-face {
     font-family: "BigTitles";
     src: url(../fonts/Big_Titles.otf) format("opentype");
@@ -79,9 +78,7 @@ html {
     font-display: swap;
 }
 
-/* =========================================================
-   BASE
-   ========================================================= */
+
 body {
     font-family: monospace;
     line-height: 1.5;
@@ -89,7 +86,6 @@ body {
     overflow-x: hidden;
 }
 
-/* CORRECTION : plus de width: 700px global, les images ne débordent plus */
 img {
     max-width: 100%;
     height: auto;
@@ -100,14 +96,17 @@ img:hover {
     transform: translateZ(20px);
 }
 
-/* =========================================================
-   SLIDER D'ACCUEIL
-   ========================================================= */
+
 .slider {
     width: 100%;
-    min-height: 80vh;   /* fallback */
-    min-height: 80dvh;  /* CORRECTION : dvh pour les barres d'adresse mobiles */
+    min-height: 80vh;
+    min-height: 80dvh;
     aspect-ratio: 16/9;
+    box-sizing: border-box;
+    padding: 260px 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: rgba(0, 0, 0, 0);
     position: relative;
 }
@@ -116,6 +115,7 @@ img:hover {
     .slider {
         min-height: 60vh;
         min-height: 60dvh;
+        padding-top: 240px;
     }
 }
 
@@ -123,22 +123,17 @@ img:hover {
     .slider {
         min-height: 50vh;
         min-height: 50dvh;
+        padding-top: 270px; 
     }
 }
 
 .slider-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative; 
+    width: 100%;
     text-align: center;
-    width: 100%; /* CORRECTION : évite que le contenu soit comprimé sur petit écran */
-    padding: 0 10px;
 }
 
-/* =========================================================
-   BULLES D'ARRIERE-PLAN
-   ========================================================= */
+
 .bg-blobs {
     position: fixed;
     top: 0;
@@ -256,13 +251,9 @@ img:hover {
     }
 }
 
-/* =========================================================
-   TITRES
-   CORRECTION : clamp(min, fluide, max) remplace les media queries.
-   Le max correspond à ta taille desktop d'origine.
-   ========================================================= */
 
-/* TITRE NOM PRENOM */
+
+
 h1 {
     color: #dcedfa;
     font-size: clamp(1.8rem, 10vw, 8rem);
@@ -270,7 +261,6 @@ h1 {
     line-height: 1;
 }
 
-/* TITRE A PROPOS DE MOI */
 h2 {
     color: #83c2eb;
     font-size: clamp(1.8rem, 12vw, 10rem);
@@ -278,7 +268,7 @@ h2 {
     letter-spacing: 0.025em;
 }
 
-/* TITRE MES CREATIONS */
+
 h3 {
     color: #dcedfa;
     font-size: clamp(1.8rem, 10vw, 8rem);
@@ -286,7 +276,6 @@ h3 {
     letter-spacing: 0.025em;
 }
 
-/* TITRE CONTACT */
 h4 {
     color: #83c2eb;
     font-size: clamp(1.8rem, 7.5vw, 6rem);
@@ -295,22 +284,18 @@ h4 {
     letter-spacing: 0.035em;
 }
 
-/* Mots longs : évite le débordement horizontal */
 h1, h2, h3, h4 {
     overflow-wrap: break-word;
 }
 
-/* =========================================================
-   AVATAR
-   ========================================================= */
-#avatar {
+
+/*#avatar {
     position: absolute;
     left: 50%;
-    top: -160px;
-       /* à ajuster : voir remarque ci-dessous */
-
+    bottom: calc(100% + var(--avatar-gap));
     opacity: 0;
-    transform: translateX(-50%) scale(2);
+    transform: translate(-50%, -50%) scale(var(--avatar-scale));
+    transform-origin: center bottom;
     transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
 
@@ -322,38 +307,8 @@ h1, h2, h3, h4 {
 
 #avatar.show {
     opacity: 1;
-    transform: translateX(-50%) scale(2);
-}
+}*/
 
-@media screen and (max-width: 1024px) {
-    #avatar {
-        top: -130px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    #avatar {
-        top: -120px;
-        transform: translateX(-50%) scale(1.5);
-    }
-    #avatar.show {
-        transform: translateX(-50%) scale(1.5);
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #avatar {
-        top: -90px;
-        transform: translateX(-50%) scale(1.2);
-    }
-    #avatar.show {
-        transform: translateX(-50%) scale(1.2);
-    }
-}
-
-/* =========================================================
-   SECTION MES CREATIONS
-   ========================================================= */
 #creations h3 {
     margin-top: 200px;
     margin-bottom: 0px;
@@ -376,7 +331,7 @@ h1, h2, h3, h4 {
     margin-bottom: 0px;
     display: flex;
     align-items: center;
-    gap: clamp(20px, 6vw, 80px); /* CORRECTION : gap fluide */
+    gap: clamp(20px, 6vw, 80px); 
 }
 
 .titre_categorie::after {
@@ -493,9 +448,7 @@ h1, h2, h3, h4 {
     font-family: "InterBold";
 }
 
-/* =========================================================
-   MISE EN PAGE GENERALE
-   ========================================================= */
+
 .section {
     padding: 100px 0;
     margin-bottom: 200px;
@@ -505,11 +458,11 @@ h1, h2, h3, h4 {
 .boxed {
     max-width: 1280px;
     margin-inline: auto;
-    padding-inline: 20px; /* CORRECTION : marge de sécurité sur tablette */
+    padding-inline: 20px; 
 }
 
 .flex {
-    display: flex; /* texte à côté du titre */
+    display: flex; 
     align-items: center;
     gap: 40px;
 }
@@ -537,7 +490,7 @@ h1, h2, h3, h4 {
     text-align: center;
 }
 
-/* CORRECTION : breakpoint tablette */
+
 @media screen and (max-width: 1024px) {
     .flex {
         gap: 30px;
@@ -605,10 +558,7 @@ h1, h2, h3, h4 {
     }
 }
 
-/* =========================================================
-   SLIDER PROJETS
-   CORRECTION : toutes les largeurs dépendent de --slide-w
-   ========================================================= */
+
 .autoplayslider {
     width: 100%;
     min-height: 80vh;
@@ -653,11 +603,7 @@ h1, h2, h3, h4 {
     transition: transform 0.4s ease;
 }
 
-/* =========================================================
-   FORMES DES IMAGES (trapèzes)
-   CORRECTION : décalages proportionnels à --slide-w
-   (valeurs d'origine basées sur 500px)
-   ========================================================= */
+
 .trapeze1 {
     width: 100%;
     height: 100%;
@@ -671,7 +617,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     position: absolute;
-    left: calc(var(--slide-w) * -0.2);   /* -100px */
+    left: calc(var(--slide-w) * -0.2);   
     object-fit: cover;
     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
@@ -680,7 +626,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     position: absolute;
-    left: calc(var(--slide-w) * -0.12);  /* -60px */
+    left: calc(var(--slide-w) * -0.12);  
     object-fit: cover;
     clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
 }
@@ -689,7 +635,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     position: absolute;
-    left: calc(var(--slide-w) * -0.3);   /* -150px */
+    left: calc(var(--slide-w) * -0.3);   
     object-fit: cover;
     clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 25% 100%);
 }
@@ -698,7 +644,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     position: absolute;
-    left: calc(var(--slide-w) * -0.49);  /* -245px */
+    left: calc(var(--slide-w) * -0.49);  
     object-fit: cover;
     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
@@ -707,16 +653,12 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     position: absolute;
-    left: calc(var(--slide-w) * -0.42);  /* -210px */
+    left: calc(var(--slide-w) * -0.42);  
     object-fit: cover;
     clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
 
-/* =========================================================
-   CURSEUR PERSONNALISE
-   CORRECTION : uniquement sur appareils avec souris.
-   Sur tactile : curseur normal et bulle masquée.
-   ========================================================= */
+
 .cursor-text {
     position: fixed;
     pointer-events: none;
@@ -771,9 +713,7 @@ h1, h2, h3, h4 {
     }
 }
 
-/* =========================================================
-   BARRE DE NAVIGATION
-   ========================================================= */
+
 #navbar {
     position: fixed;
     top: 10px;
@@ -816,7 +756,7 @@ h1, h2, h3, h4 {
     top: 100%;
     left: 0;
     width: 100%;
-    height: 20px; /* zone tampon invisible */
+    height: 20px; 
     background: transparent;
     z-index: 0;
 }
@@ -847,8 +787,7 @@ h1, h2, h3, h4 {
     font-family: "InterBold";
 }
 
-/* CORRECTION : le :hover seulement avec une souris,
-   la classe .active (ajoutée en JS au toucher) marche partout */
+
 @media (hover: hover) {
     .has-sous-nav:hover .sous-nav {
         display: block;
@@ -920,15 +859,13 @@ h1, h2, h3, h4 {
         width: 100%;
     }
 
-    /* sous-menu intégré dans le flux au lieu de flotter */
+
     .has-sous-nav.active .sous-nav {
         position: static;
     }
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
+
 .footer {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -990,6 +927,27 @@ h1, h2, h3, h4 {
 .hdp a:hover {
     color: #83c2eb;
     font-weight: bold;
+}
+
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-copyright {
+        position: static;
+        order: 1;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .footer-copyright p {
+        font-size: inherit;
+        margin: 0;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -1054,9 +1012,6 @@ h1, h2, h3, h4 {
     }
 }
 
-/* =========================================================
-   BULLES CONTACT ET CV
-   ========================================================= */
 .bulle-contact {
     position: fixed;
     right: 40px;
@@ -1080,19 +1035,20 @@ h1, h2, h3, h4 {
     transform: scale(1.1);
 }
 
-/* Cache la bulle quand on est sur le footer */
+
 .footer-visible .bulle-contact {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
-#bulle-cv {
-    bottom: 75%;
-}
-
 #bulle-contact {
     bottom: 80%;
+}
+
+
+#bulle-cv {
+    bottom: calc(80% - 60px);
 }
 
 @media screen and (max-width: 768px) {
@@ -1103,12 +1059,12 @@ h1, h2, h3, h4 {
         right: 25px;
     }
 
-    #bulle-cv {
-        bottom: 70%;
-    }
-
     #bulle-contact {
         bottom: 75%;
+    }
+
+    #bulle-cv {
+        bottom: calc(75% - 50px);
     }
 }
 
@@ -1120,29 +1076,27 @@ h1, h2, h3, h4 {
         right: 15px;
     }
 
-    #bulle-cv {
-        bottom: 65%;
-    }
-
     #bulle-contact {
         bottom: 70%;
     }
+
+    #bulle-cv {
+        bottom: calc(70% - 45px);
+    }
 }
 
-/* CORRECTION : écran bas (paysage mobile) : évite le chevauchement avec la navbar */
-@media screen and (max-height: 500px) {
-    #bulle-cv {
-        bottom: 15%;
-    }
 
+@media screen and (max-height: 500px) {
     #bulle-contact {
         bottom: 30%;
     }
+
+    #bulle-cv {
+        bottom: calc(30% - 55px);
+    }
 }
 
-/* =========================================================
-   SECTION SHOWREEL
-   ========================================================= */
+
 .showreel-section {
     background: rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(10px);
@@ -1170,7 +1124,6 @@ h1, h2, h3, h4 {
     }
 }
 
-/* Conteneur vidéo */
 .video-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -1186,9 +1139,6 @@ h1, h2, h3, h4 {
     display: block;
 }
 
-/* =========================================================
-   GALERIES
-   ========================================================= */
 .image_container {
     display: flex;
     flex-direction: column;
@@ -1202,7 +1152,7 @@ h1, h2, h3, h4 {
     width: 100%;
 }
 
-/* CORRECTION : grille responsive 3 -> 2 -> 1 colonnes */
+
 .Affiches {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1222,9 +1172,7 @@ h1, h2, h3, h4 {
     }
 }
 
-/* =========================================================
-   TEXTES DIVERS
-   ========================================================= */
+
 #name {
     font-family: "BigTitles";
 }
@@ -1235,9 +1183,7 @@ h1, h2, h3, h4 {
     font-size: clamp(1.5rem, 5vw, 4rem);
 }
 
-/* =========================================================
-   LIGHTBOX
-   ========================================================= */
+
 .zoomable {
     cursor: zoom-in;
 }
@@ -1265,7 +1211,7 @@ h1, h2, h3, h4 {
 .lightbox-img {
     width: 96vw;
     height: 94vh;
-    height: 94dvh; /* CORRECTION */
+    height: 94dvh; 
     object-fit: contain;
     border-radius: 8px;
     cursor: default;

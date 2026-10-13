@@ -1,315 +1,251 @@
-console.log("salut");
-
-const name = document.getElementById("name");
+/* =========================================================
+   AVATAR (vidéo qui apparaît au survol du nom)
+   ========================================================= 
+const nameEl = document.getElementById("name");
 const avatar = document.getElementById("avatar");
-const avatarSrc = document.getElementById("avatar-src");
+const avatarSrc = document.getElementById("avatar-src");*/
 
 // Chemins vers tes deux vidéos
-const arrival = "videoscompr/videos_moi_entree.mp4";  // perso arrive
-const leave = "videoscompr/videos_moi_sortir.mp4";      // perso part
+/*const arrival = "videoscompr/videos_moi_entree.mp4"; // perso arrive
+const leave = "videoscompr/videos_moi_sortir.mp4";   // perso part
 
 let isHovering = false;
 
-name.addEventListener("mouseenter", () => {
+function showAvatar() {
     isHovering = true;
 
-    avatarSrc.src = arrival;   // charge la vidéo d’arrivée
+    avatarSrc.src = arrival;
     avatar.load();
     avatar.classList.add("show");
 
     avatar.currentTime = 0;
-    avatar.play();
-});
+    avatar.play().catch(() => {}); // évite l'erreur si le navigateur bloque la lecture
+}
 
-name.addEventListener("mouseleave", () => {
+function hideAvatar() {
     isHovering = false;
 
-    avatarSrc.src = leave;    // charge la vidéo de départ
+    avatarSrc.src = leave;
     avatar.load();
 
     avatar.currentTime = 0;
-    avatar.play();
+    avatar.play().catch(() => {});
 
-    // Quand la vidéo "leave" est finie → cacher l’avatar
+    // Quand la vidéo "leave" est finie : cacher l'avatar
     avatar.onended = () => {
         if (!isHovering) {
             avatar.classList.remove("show");
         }
     };
-});
+}
 
+nameEl.addEventListener("mouseenter", showAvatar);
+nameEl.addEventListener("mouseleave", hideAvatar);
 
-//const slides = document.querySelectorAll('.slide');
-
-//slides.forEach((slide, i) => {
-  //slide.addEventListener('mouseenter', () => {
-    //slide.style.transform = 'scale(1.2)';
-
-    //slides.forEach((other, j) => {
-      //const distance = j - i;
-      //if (distance === 0) return; // l'image elle-même
-      // Plus une image est proche, plus elle bouge
-      //const offset = 200 / Math.abs(distance);
-      //other.style.transform = `translateX(${distance * offset}px)`;
-    //});
-  //});
-
-  //slide.addEventListener('mouseleave', () => {
-    //slides.forEach((other) => {
-      //other.style.transform = 'translateX(0) scale(1)';
-    //});
-  //});
-//});
-
-//const track = document.querySelector('.slide-track');
-//const slidess = Array.from(track.children);
-
-//slidess.forEach(slide => {
-  //track.appendChild(slide.cloneNode(true)); // duplique toutes les slides
-//});
-
-// Re-sélectionner toutes les slides (y compris les clones)
-//const allSlides = document.querySelectorAll('.slide');
-
-//allSlides.forEach(slide => {
-    //slide.addEventListener('click', () => {
-        //const page = slide.dataset.page;
-        //if (page) {
-            //window.location.href = page;
-        //}
-    //});
-//});
-
-
-// Scroll fluide pour tous les liens internes
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').slice(1);
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+// CORRECTION tactile : un tap ailleurs que sur le nom fait repartir l'avatar
+document.addEventListener("click", e => {
+    if (isHovering && !nameEl.contains(e.target)) {
+        hideAvatar();
     }
-  });
-});
+});*/
 
 
+/* =========================================================
+   NAVBAR : sous-menu au toucher
+   CORRECTION : ce bloc doit rester AVANT le "scroll fluide"
+   1er tap sur "Mes créations" = ouvre le sous-menu
+   2e tap = va à la section
+   ========================================================= */
+const menuParent = document.querySelector(".has-sous-nav");
+const isTouch = () => window.matchMedia("(hover: none)").matches;
 
-
-
-
-// Création du span qui va suivre la souris
-const cursorText = document.createElement('span');
-cursorText.classList.add('cursor-text');
-//cursorText.textContent = 'Découvrir';
-document.body.appendChild(cursorText);
-
-// Sélectionne toutes les slides
-////slidesss.forEach(slide => {
-    //slide.addEventListener('mouseenter', () => {
-        //cursorText.style.opacity = '1';
-    //});
-
-    //slide.addEventListener('mouseleave', () => {
-        //cursorText.style.opacity = '0';
-    //});
-
-    //slide.addEventListener('mousemove', e => {
-        //cursorText.style.left = e.clientX + 15 + 'px';
-        //cursorText.style.top = e.clientY + 15 + 'px';
-    //})
-
-// Pour les slides
-document.querySelectorAll('.lien-jeu').forEach(slide => {
-    slide.addEventListener('mouseenter', () => {
-      cursorText.style.opacity = '1';
-      cursorText.textContent = 'Découvrir le jeu';
-      });
-    slide.addEventListener('mouseleave', () => cursorText.style.opacity = '0');
-    slide.addEventListener('mousemove', e => {
-        cursorText.style.left = e.clientX + 15 + 'px';
-        cursorText.style.top = e.clientY + 15 + 'px';
-    });
-    slide.addEventListener('click', () => {
-    const url = slide.dataset.url;
-    if (url) {
-      window.open(url, '_blank');
-    }
-    });
-});
-
-// Pour les médias (images et vidéos)
-//document.querySelectorAll('.video-poster').forEach(media => {
-    //media.addEventListener('mouseenter', () => {
-      //cursorText.style.opacity = '1';
-      //cursorText.textContent = 'Découvrir le projet';
-      //document.body.style.cursor = 'none';
-      //});
-    //media.addEventListener('mouseleave', () => {
-      //cursorText.style.opacity = '0';
-      //document.body.style.cursor = 'auto';
-      //});
-
-    //media.addEventListener('mousemove', e => {
-        //cursorText.style.left = e.clientX + 15 + 'px';
-        //cursorText.style.top = e.clientY + 15 + 'px';
-    //});
-    //media.addEventListener('click', () => {
-    //const videoSrc = media.dataset.video;
-    //const video = document.createElement('video');
-    //video.src = videoSrc;
-    //video.controls = true;
-    //video.autoplay = true;
-    //video.width = media.width;
-
-    //media.replaceWith(video);
-
-    //cursorText.style.opacity = '0';
-    //document.body.style.cursor = 'auto';
-    //});
-//});
-
-
-document.querySelectorAll('.video-poster').forEach(media => {
-    media.addEventListener('mouseenter', () => {
-        cursorText.style.opacity = '1';
-        cursorText.textContent = 'Découvrir le projet';
-    });
-
-    media.addEventListener('mouseleave', () => {
-        cursorText.style.opacity = '0';
-        document.body.style.cursor = 'auto';
-    });
-
-    media.addEventListener('mousemove', e => {
-        cursorText.style.left = e.clientX + 15 + 'px';
-        cursorText.style.top = e.clientY + 15 + 'px';
-    });
-
-    media.addEventListener('click', () => {
-        const videoSrc = media.dataset.video;
-        if (!videoSrc) return; // sécurité
-
-        const video = document.createElement('video');
-        video.src = videoSrc;
-        video.controls = true;
-        video.autoplay = true;
-
-        // largeur fiable pour Safari
-        const width = media.getBoundingClientRect().width;
-        video.style.width = width + 'px';
-        video.style.height = 'auto';
-
-        // remplace l'image par la vidéo
-        media.replaceWith(video);
-
-        cursorText.style.opacity = '0';
-        document.body.style.cursor = 'auto';
-    });
-});
-
-
-
-
-
-
-
-document.querySelectorAll('.sous-nav a').forEach(link => {
-    link.addEventListener('click', (e) => {
+menuParent.querySelector(":scope > a").addEventListener("click", e => {
+    if (isTouch() && !menuParent.classList.contains("active")) {
         e.preventDefault();
-        const targetId = link.getAttribute('href').slice(1);
+        e.stopImmediatePropagation();
+        menuParent.classList.add("active");
+    }
+});
+
+// Ferme le sous-menu si on tape ailleurs ou sur un de ses liens
+document.addEventListener("click", e => {
+    if (!menuParent.contains(e.target)) {
+        menuParent.classList.remove("active");
+    }
+});
+
+menuParent.querySelectorAll(".sous-nav a").forEach(a => {
+    a.addEventListener("click", () => menuParent.classList.remove("active"));
+});
+
+
+/* =========================================================
+   SCROLL FLUIDE (tous les liens internes, sous-menu compris)
+   CORRECTION : le doublon sur ".sous-nav a" est supprimé,
+   ce bloc gère déjà ces liens.
+   ========================================================= */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href").slice(1);
         const target = document.getElementById(targetId);
         if (target) {
-          target.scrollIntoView({behavior: 'smooth'});
+            target.scrollIntoView({ behavior: "smooth" });
         }
     });
 });
 
 
+/* =========================================================
+   TEXTE QUI SUIT LA SOURIS
+   (désactivé automatiquement sur tactile par le CSS)
+   ========================================================= */
+const cursorText = document.createElement("span");
+cursorText.classList.add("cursor-text");
+document.body.appendChild(cursorText);
 
-//document.getElementById('bulle-cv').addEventListener('click', () => {
-  //window.location.href = "pdf/version2026/cv.pdf"
-//});
-document.getElementById('bulle-cv').addEventListener('click', () => {
-  window.open ("pdf/version2026/cv.pdf", "_blank", "noopener");
-});
+function followCursor(e) {
+    cursorText.style.left = e.clientX + 15 + "px";
+    cursorText.style.top = e.clientY + 15 + "px";
+}
 
-
-// Défilement fluide vers la section contact
-document.getElementById('bulle-contact').addEventListener('click', () => {
-  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-});
-
-// Détection de la visibilité du footer pour cacher la bulle
-const footer = document.querySelector('footer');
-const observer = new IntersectionObserver(
-  (entries) => {
-    if (entries[0].isIntersecting) {
-      document.body.classList.add('footer-visible');
-    } else {
-      document.body.classList.remove('footer-visible');
-    }
-  },
-  { threshold: 0.1 }
-);
-
-observer.observe(footer);
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sections = document.querySelectorAll('.page-section');
-
-  const observation = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      } else {
-        entry.target.classList.remove("visible");
-      }
+// Lien vers le jeu
+document.querySelectorAll(".lien-jeu").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        cursorText.style.opacity = "1";
+        cursorText.textContent = "Découvrir le jeu";
     });
-  }, {
-    threshold: 0.001 // plus petit = transition plus douce entre les sections
-  });
+    el.addEventListener("mouseleave", () => {
+        cursorText.style.opacity = "0";
+    });
+    el.addEventListener("mousemove", followCursor);
+    el.addEventListener("click", () => {
+        const url = el.dataset.url;
+        if (url) {
+            window.open(url, "_blank", "noopener");
+        }
+    });
+});
 
-  sections.forEach(section => observation.observe(section));
+// Images qui se transforment en vidéo au clic
+document.querySelectorAll(".video-poster").forEach(media => {
+    media.addEventListener("mouseenter", () => {
+        cursorText.style.opacity = "1";
+        cursorText.textContent = "Découvrir le projet";
+    });
+
+    media.addEventListener("mouseleave", () => {
+        cursorText.style.opacity = "0";
+    });
+
+    media.addEventListener("mousemove", followCursor);
+
+    media.addEventListener("click", () => {
+        const videoSrc = media.dataset.video;
+        if (!videoSrc) return; // sécurité
+
+        const video = document.createElement("video");
+        video.src = videoSrc;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true; // CORRECTION : évite le plein écran forcé sur iPhone
+
+        // CORRECTION : plus de largeur en pixels.
+        // Le CSS (.media video { width: 100%; max-width: 900px }) gère la taille
+        // et s'adapte si on tourne l'écran ou redimensionne la fenêtre.
+
+        media.replaceWith(video);
+
+        cursorText.style.opacity = "0";
+    });
 });
 
 
+/* =========================================================
+   BULLES CV ET CONTACT
+   ========================================================= */
+document.getElementById("bulle-cv").addEventListener("click", () => {
+    window.open("pdf/version2026/cv.pdf", "_blank", "noopener");
+});
 
-// ----- Lightbox : images en plein écran -----
-const lightbox = document.createElement('div');
-lightbox.classList.add('lightbox');
+document.getElementById("bulle-contact").addEventListener("click", () => {
+    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+});
+
+// Cache les bulles quand le footer est visible
+const footer = document.querySelector("footer");
+const footerObserver = new IntersectionObserver(
+    entries => {
+        if (entries[0].isIntersecting) {
+            document.body.classList.add("footer-visible");
+        } else {
+            document.body.classList.remove("footer-visible");
+        }
+    },
+    { threshold: 0.1 }
+);
+footerObserver.observe(footer);
+
+
+/* =========================================================
+   APPARITION DES SECTIONS AU SCROLL
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll(".page-section");
+
+    const sectionObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                } else {
+                    entry.target.classList.remove("visible");
+                }
+            });
+        },
+        { threshold: 0.001 } // petit = transition plus douce entre les sections
+    );
+
+    sections.forEach(section => sectionObserver.observe(section));
+});
+
+
+/* =========================================================
+   LIGHTBOX : images en plein écran
+   ========================================================= */
+const lightbox = document.createElement("div");
+lightbox.classList.add("lightbox");
 lightbox.innerHTML = `
   <button class="lightbox-close" aria-label="Fermer">&times;</button>
   <img class="lightbox-img" src="" alt="">
 `;
 document.body.appendChild(lightbox);
 
-const lightboxImg = lightbox.querySelector('.lightbox-img');
+const lightboxImg = lightbox.querySelector(".lightbox-img");
 
 function openLightbox(src, alt) {
-  lightboxImg.src = src;
-  lightboxImg.alt = alt;
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden'; // bloque le scroll derrière
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden"; // bloque le scroll derrière
 }
 
 function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
 }
 
 // Images cliquables : celles des projets, sauf les vidéos et le lien du jeu
-document.querySelectorAll('.media img').forEach(img => {
-  if (img.classList.contains('video-poster')) return;
-  if (img.closest('.lien-jeu')) return;
+document.querySelectorAll(".media img").forEach(img => {
+    if (img.classList.contains("video-poster")) return;
+    if (img.closest(".lien-jeu")) return;
 
-  img.classList.add('zoomable');
-  img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    img.classList.add("zoomable");
+    img.addEventListener("click", () => openLightbox(img.src, img.alt));
 });
 
 // Fermer : clic n'importe où, ou touche Échap
-lightbox.addEventListener('click', closeLightbox);
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLightbox();
+lightbox.addEventListener("click", closeLightbox);
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeLightbox();
 });
