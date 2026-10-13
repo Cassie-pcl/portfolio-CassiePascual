@@ -227,9 +227,13 @@ document.querySelectorAll('.sous-nav a').forEach(link => {
 
 
 
+//document.getElementById('bulle-cv').addEventListener('click', () => {
+  //window.location.href = "pdf/version2026/cv.pdf"
+//});
 document.getElementById('bulle-cv').addEventListener('click', () => {
-  window.location.href = "pdf/cv_lastvf.pdf"
+  window.open ("pdf/version2026/cv.pdf", "_blank", "noopener");
 });
+
 
 // Défilement fluide vers la section contact
 document.getElementById('bulle-contact').addEventListener('click', () => {
@@ -272,3 +276,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// ----- Lightbox : images en plein écran -----
+const lightbox = document.createElement('div');
+lightbox.classList.add('lightbox');
+lightbox.innerHTML = `
+  <button class="lightbox-close" aria-label="Fermer">&times;</button>
+  <img class="lightbox-img" src="" alt="">
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg = lightbox.querySelector('.lightbox-img');
+
+function openLightbox(src, alt) {
+  lightboxImg.src = src;
+  lightboxImg.alt = alt;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden'; // bloque le scroll derrière
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Images cliquables : celles des projets, sauf les vidéos et le lien du jeu
+document.querySelectorAll('.media img').forEach(img => {
+  if (img.classList.contains('video-poster')) return;
+  if (img.closest('.lien-jeu')) return;
+
+  img.classList.add('zoomable');
+  img.addEventListener('click', () => openLightbox(img.src, img.alt));
+});
+
+// Fermer : clic n'importe où, ou touche Échap
+lightbox.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
